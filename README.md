@@ -1,3 +1,15 @@
+# Purpose
+This purpose of this lab was to setup code that will take a csv file, create a SQL database, and utilize SQLite to perform CRUD (Create, Read, Update, Delete) Operations. The entire system is wrapped around the Fire library. This library was utilized to make performing CRUD Operations with the database all through the command line, giving the project a CLI. Command line interfaces are important for the use of easy to use and integrate SQL into python and utilize it seamlessly. SQLlite3 will be the python package utilized for this process. 
+
+Tasks Performed
+Create SQL Database
+Write code to utilize SQLite for query execution
+Wrap main.py execution with Fire library to convert code into CLI
+Write up different CRUD SQL Queries to test functionality
+Test connection
+
+
+
 ## SQLite Lab
 
 ![4 17-etl-sqlite-RAW](https://github.com/nogibjj/sqlite-lab/assets/58792/b39b21b4-ccb4-4cc4-b262-7db34492c16d)
