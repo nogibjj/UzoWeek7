@@ -7,14 +7,19 @@ from mylib.transform_load import load
 from mylib.query import query
 import fire
 
+
 def main(query_statements):
-  print("Extracting data...")
-  extract()
+    print("Extracting data...")
+    extract()
 
-# Transform and load
-  print("Transforming data...")
-  load()
+    # Transform and load
+    print("Transforming data...")
+    load()
 
-# Query
-  print("Querying data...")
-  query()
+    # Query
+    print("Querying data...")
+    query()
+
+
+if __name__ == "__main__":
+    fire.Fire(main)
