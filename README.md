@@ -8,5 +8,7 @@ Wrap main.py execution with Fire library to convert code into CLI
 Write up different CRUD SQL Queries to test functionality
 Test connection
 
+#### With the use of command line tools and SQLlite3 we were able to create a unisex name database compatible with SQL and with the use of the read_data CL tool we were able to create a query. Using C.R.U.D we can make changes to our Database if need be.
+
 
 

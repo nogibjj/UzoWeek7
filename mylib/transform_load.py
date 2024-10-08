@@ -1,7 +1,7 @@
 """
 Transforms and Loads data into the local SQLite3 database
 Example:
-,general name,count_products,ingred_FPro,avg_FPro_products,avg_distance_root,ingred_normalization_term,semantic_tree_name,semantic_tree_node
+,general name,count_products,ingred_FPro,avg_FPro_products
 """
 
 import sqlite3
