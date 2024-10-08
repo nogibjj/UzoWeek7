@@ -29,7 +29,7 @@ def general_query(query):
     log_query(query)
 
 
-# Update the `create_record` function to match the WRRankingDB table
+# Update the `create_record` function to match the unisexdb table
 def create_record(name, total, male_share, female_share, gap):
     """Create a record in unisexdb"""
     conn = sqlite3.connect("unisexdb.db")
@@ -71,7 +71,9 @@ def update_record(record_id, name, total, male_share, female_share, gap):
 
     log_query(
         f"""UPDATE unisexdb 
-        SET NAME = {name}, TOTAL = {total}, MALE_SHARE = {male_share}, FEMALE_SHARE = {female_share}, GAP = {gap}
+        SET NAME = {name}, TOTAL = {total},
+        MALE_SHARE = {male_share}, 
+        FEMALE_SHARE = {female_share}, GAP = {gap}
         WHERE id = {record_id};
         """
     )
