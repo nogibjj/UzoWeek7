@@ -46,7 +46,7 @@ def create_record(name, total, male_share, female_share, gap):
     conn.close()
 
     log_query(
-        f"""INSERT INTO unsisexdb 
+        f"""INSERT INTO unisexdb 
         (NAME, TOTAL, MALE_SHARE, FEMALE_SHARE, GAP) 
         VALUES ({name}, {total}, {male_share}, {female_share}, {gap});
         """
