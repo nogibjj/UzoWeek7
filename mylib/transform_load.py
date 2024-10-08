@@ -10,7 +10,7 @@ import os
 
 
 # load the csv file and insert into a new sqlite3 database
-def load(dataset="C:\Users\uzoma\UzoSqlLiteLab\unisex_names_table.csv"):
+def load(dataset="data/unisex_names_table.csv"):
     """ "Transforms and Loads data into the local SQLite3 database"""
 
     # prints the full working directory and path
@@ -18,12 +18,12 @@ def load(dataset="C:\Users\uzoma\UzoSqlLiteLab\unisex_names_table.csv"):
     payload = csv.reader(open(dataset, newline=""), delimiter=",")
     conn = sqlite3.connect("unisexdb.db")
     c = conn.cursor()
-    c.execute("DROP TABLE IF EXISTS GroceryDB")
+    c.execute("DROP TABLE IF EXISTS unisexdb")
     c.execute(
-        "CREATE TABLE unisexdb ( , name, total, male_share, female_share, gap)"
+        "CREATE TABLE unisexdb (RECORD_ID, name, total, male_share, female_share, gap)"
     )
     # insert
-    c.executemany("INSERT INTO unisexdb VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)", payload)
+    c.executemany("""INSERT INTO unisexdb VALUES (?,?,?, ?, ?, ?)""", payload)
     conn.commit()
     conn.close()
     return "unisexdb.db"
