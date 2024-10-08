@@ -19,9 +19,9 @@ def load(dataset="data/unisex_names_table.csv"):
     conn = sqlite3.connect("unisexdb.db")
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS unisexdb")
-    c.execute("CREATE TABLE unisexdb (name, total, male_share, female_share, gap)")
+    c.execute("CREATE TABLE unisexdb (ID, name, total, male_share, female_share, gap)")
     # insert
-    c.executemany("""INSERT INTO unisexdb VALUES (?, ?, ?, ?,?)""", payload)
+    c.executemany("""INSERT INTO unisexdb VALUES (?, ?, ?, ?, ?,?)""", payload)
     conn.commit()
     conn.close()
     return "unisexdb.db"

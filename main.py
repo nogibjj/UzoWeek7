@@ -40,4 +40,4 @@ update_record(
 )
 
 # Delete a record
-delete_record("5")
+# delete_record("5")

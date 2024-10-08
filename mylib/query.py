@@ -30,7 +30,7 @@ def general_query(query):
 
 
 # Fix the `create_record` function to match the unisexdb table structure
-def create_record(name, total, male_share, female_share, gap):
+def create_record(ID, name, total, male_share, female_share, gap):
     """Create a record in unisexdb"""
     conn = sqlite3.connect("unisexdb.db")
     c = conn.cursor()
@@ -39,10 +39,10 @@ def create_record(name, total, male_share, female_share, gap):
     c.execute(
         """
         INSERT INTO unisexdb 
-        (NAME, TOTAL, MALE_SHARE, FEMALE_SHARE, GAP) 
-        VALUES (?, ?, ?, ?, ?)
+        (ID ,NAME, TOTAL, MALE_SHARE, FEMALE_SHARE, GAP) 
+        VALUES (?, ?, ?, ?, ?, ?)
         """,
-        (name, total, male_share, female_share, gap),
+        (ID, name, total, male_share, female_share, gap),
     )
 
     conn.commit()
@@ -52,13 +52,13 @@ def create_record(name, total, male_share, female_share, gap):
     log_query(
         f"""INSERT INTO unisexdb 
         (NAME, TOTAL, MALE_SHARE, FEMALE_SHARE, GAP) 
-        VALUES ('{name}', {total}, {male_share}, {female_share}, {gap});
+        VALUES ( '{ID}', {name}', {total}, {male_share}, {female_share}, {gap});
         """
     )
 
 
 # Fix the `update_record` function
-def update_record(record_id, name, total, male_share, female_share, gap):
+def update_record(ID, name, total, male_share, female_share, gap):
     """Update a record in unisexdb"""
     conn = sqlite3.connect("unisexdb.db")
     c = conn.cursor()
@@ -68,9 +68,9 @@ def update_record(record_id, name, total, male_share, female_share, gap):
         """
         UPDATE unisexdb
         SET NAME=?, TOTAL=?, MALE_SHARE=?, FEMALE_SHARE=?, GAP=? 
-        WHERE id=?
+        WHERE ID=?
         """,
-        (name, total, male_share, female_share, gap, record_id),
+        (ID, name, total, male_share, female_share, gap),
     )
 
     conn.commit()
@@ -81,25 +81,25 @@ def update_record(record_id, name, total, male_share, female_share, gap):
         f"""UPDATE unisexdb 
         SET NAME = '{name}', TOTAL = {total}, MALE_SHARE = {male_share}, 
         FEMALE_SHARE = {female_share}, GAP = {gap}
-        WHERE id = {record_id};
+        WHERE ID = {ID};
         """
     )
 
 
 # Fix the `delete_record` function
-def delete_record(record_id):
+def delete_record(ID):
     """Delete a record from unisexdb"""
     conn = sqlite3.connect("unisexdb.db")
     c = conn.cursor()
 
     # Delete the record with the specified ID
-    c.execute("DELETE FROM unisexdb WHERE id=?", (record_id,))
+    c.execute("DELETE FROM unisexdb WHERE id=?", (ID))
 
     conn.commit()
     conn.close()
 
     # Log the SQL statement for the operation
-    log_query(f"DELETE FROM unisexdb WHERE id={record_id};")
+    log_query(f"DELETE FROM unisexdb WHERE id={ID};")
 
 
 # Fix the `read_data` function to read from unisexdb
