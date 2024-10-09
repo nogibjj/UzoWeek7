@@ -70,15 +70,15 @@ def test_update_record():
     assert result.returncode == 0
 
 
-# def test_delete_record():
-#     """Tests the delete_record() function."""
-#     result = subprocess.run(
-#         ["python", "main.py"],
-#         capture_output=True,
-#         text=True,
-#         check=True,
-#     )
-#     assert result.returncode == 0
+def test_delete_record():
+    """Tests the delete_record() function."""
+    result = subprocess.run(
+        ["python", "main.py"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert result.returncode == 0
 
 
 if __name__ == "__main__":
@@ -87,4 +87,4 @@ if __name__ == "__main__":
     test_create_record()
     test_read_data()
     test_update_record()
-    # test_delete_record()
+    test_delete_record()

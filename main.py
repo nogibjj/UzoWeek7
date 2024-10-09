@@ -4,7 +4,7 @@ Handles CLI commands
 
 from mylib.extract import extract
 from mylib.transform_load import load
-from mylib.query import create_record, read_data, update_record  # delete_record
+from mylib.query import create_record, read_data, update_record, delete_record
 
 # Extract
 print("Extracting data...")
@@ -40,4 +40,5 @@ update_record(
 )
 
 # Delete a record
-# delete_record("5")
+print("Deleting data...")
+delete_record(9)
