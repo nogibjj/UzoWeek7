@@ -93,7 +93,7 @@ def delete_record(ID):
     c = conn.cursor()
 
     # Delete the record with the specified ID
-    c.execute("DELETE FROM unisexdb WHERE id=?", (ID))
+    c.execute("DELETE FROM unisexdb WHERE id=?", (ID,))
 
     conn.commit()
     conn.close()
