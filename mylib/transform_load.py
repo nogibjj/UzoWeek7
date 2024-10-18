@@ -16,9 +16,9 @@ def transform_load(
     payload = pd.read_csv(dataset, delimiter=",", skiprows=1)
     payload2 = pd.read_csv(dataset2, delimiter=",", skiprows=1)
     load_dotenv()
-    server_hostname = os.getenv("server_host")
-    access_token = os.getenv("api_key")
-    # http_path = os.getenv("http_path")
+    server_hostname = os.getenv("SERVER_HOST")
+    access_token = os.getenv("API_KEY")
+    http_path = os.getenv("HTTP_PATH")
     print(
         server_hostname,
         access_token,
