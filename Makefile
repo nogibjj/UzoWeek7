@@ -46,4 +46,4 @@ transform_load:
 	python main.py transform_load
 
 query:
-	python main.py general_query "SELECT * FROM unisexdb WHERE name='Alex';"
+	python main.py general_query

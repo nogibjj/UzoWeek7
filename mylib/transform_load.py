@@ -18,8 +18,11 @@ def transform_load(
     load_dotenv()
     server_hostname = os.getenv("server_host")
     access_token = os.getenv("api_key")
-    http_path = os.getenv("http_path")
-    print(server_hostname, access_token, http_path)
+    # http_path = os.getenv("http_path")
+    print(
+        server_hostname,
+        access_token,
+    )  # http_path)
     # Connect to Databricks
     with sql.connect(
         server_hostname=server_hostname,
