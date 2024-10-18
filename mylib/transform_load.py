@@ -9,25 +9,29 @@ from dotenv import load_dotenv
 
 
 # load the csv file and insert into a Databricks database
-def load(dataset="data/georgia_commits.csv", dataset2="data/georgia_offers.csv"):
+def transform_load(
+    dataset="data/georgia_commits.csv", dataset2="data/georgia_offers.csv"
+):
     """Transforms and Loads data into the local Databricks database"""
     payload = pd.read_csv(dataset, delimiter=",", skiprows=1)
     payload2 = pd.read_csv(dataset2, delimiter=",", skiprows=1)
-    load_dotenv(dotenv_path=".env")
+    load_dotenv()
     server_hostname = os.getenv("server_host")
     access_token = os.getenv("api_key")
     http_path = os.getenv("http_path")
+    print(server_hostname, access_token, http_path)
     # Connect to Databricks
     with sql.connect(
         server_hostname=server_hostname,
-        http_path=http_path,
+        http_path="/sql/1.0/warehouses/2d6f41451e6394c0",
         access_token=access_token,
     ) as connection:
         c = connection.cursor()
-
+        print("Connected!")
         # Check if the tables exist, create if not
         c.execute("SHOW TABLES FROM default LIKE 'uduGeorgiaCommits*'")
         result = c.fetchall()
+        print(result)
         if not result:
             c.execute(
                 """
@@ -65,4 +69,8 @@ def load(dataset="data/georgia_commits.csv", dataset2="data/georgia_offers.csv")
                 c.execute(f"INSERT INTO uduGeorgiaOffersDB VALUES {convert}")
         c.close()
 
-        return "Success"
+        return "Transforming data..."
+
+
+if __name__ == "__main__":
+    transform_load()

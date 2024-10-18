@@ -5,7 +5,7 @@ Handles CLI commands
 import sys
 import argparse
 from mylib.extract import extract
-from mylib.transform_load import load
+from mylib.transform_load import transform_load
 from mylib.query import general_query
 
 
@@ -31,9 +31,9 @@ def main():
     if args.action == "extract":
         print("Extracting data...")
         extract()
-    elif args.action == "load":
+    elif args.action == "transform_load":
         print("Transforming data...")
-        load()
+        transform_load()
     elif args.action == "query":
         general_query(args.query)
 

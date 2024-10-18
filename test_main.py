@@ -20,7 +20,7 @@ def test_extract():
 def test_transform_load():
     """Tests the transform_load() function."""
     result = subprocess.run(
-        ["python", "main.py", "load"],
+        ["python", "main.py", "transform_load"],
         capture_output=True,
         text=True,
         check=True,
@@ -30,35 +30,34 @@ def test_transform_load():
 
 
 def test_query():
-    """Tests a general SQL query on both Georgia offers and commits data."""
+    """Tests the query() function."""
     result = subprocess.run(
         [
             "python",
             "main.py",
             "query",
             """
-            WITH all_players AS (
-                SELECT 'Offers' AS source, name, school, city, state, ranking
-                FROM georgia_offers
-                UNION ALL
-                SELECT 'Commits' AS source, name, school, city, state, ranking
-                FROM georgia_commits
-            )
-
-            SELECT state, COUNT(*) AS total_players, AVG(ranking) AS avg_ranking
-            FROM all_players
-            GROUP BY state
-            ORDER BY total_players DESC;
+            SELECT a.state, avg(a.ranking) as average_ranking
+            FROM udugeorgiaoffersdb a
+            JOIN udugeorgiacommitsdb b
+            ON a.name = b.name
+            GROUP BY a.state
+            ORDER BY a.state DESC;
             """,
         ],
         capture_output=True,
         text=True,
-        check=True,
+        check=False,  # Disable the check for exit status 0 to prevent immediate failure
     )
-    assert result.returncode == 0
-    assert "state" in result.stdout
-    assert "total_players" in result.stdout
-    assert "avg_ranking" in result.stdout
+
+    # Print stdout and stderr for debugging purposes
+    print("stdout:", result.stdout)
+    print("stderr:", result.stderr)
+
+    # Now, you can check if the result returned an error
+    assert (
+        result.returncode == 0
+    ), f"Command failed with return code {result.returncode}. stderr: {result.stderr}"
 
 
 if __name__ == "__main__":

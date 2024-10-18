@@ -11,10 +11,10 @@ import pandas as pd
 
 def extract(
     url="""
-    https://github.com/acgowda/cfb-recruit-net/raw/525eea9f7a803080e57cee3e8b0cc0dd319ce0d3/data/2017/georgia_commits.csv
+    https://github.com/acgowda/cfb-recruit-net/blob/525eea9f7a803080e57cee3e8b0cc0dd319ce0d3/data/2017/georgia_commits.csv?raw=true
     """,
     url2="""
-    https://github.com/acgowda/cfb-recruit-net/raw/525eea9f7a803080e57cee3e8b0cc0dd319ce0d3/data/2017/georgia_offers.csv
+    https://github.com/acgowda/cfb-recruit-net/blob/525eea9f7a803080e57cee3e8b0cc0dd319ce0d3/data/2017/georgia_offers.csv?raw=true
     """,
     file_path="data/georgia_commits.csv",
     file_path2="data/georgia_offers.csv",
@@ -27,8 +27,8 @@ def extract(
         with open(file_path, "wb") as f:
             f.write(r.content)
     with requests.get(url2) as r:
-        with open(file_path2, "wb") as f:
-            f.write(r.content)
+        with open(file_path2, "a") as f:
+            f.write(r.text)
     df = pd.read_csv(file_path)
     df_2 = pd.read_csv(file_path2)
 
@@ -38,3 +38,7 @@ def extract(
     df_subset.to_csv(file_path, index=False)
     df_subset2.to_csv(file_path2, index=False)
     return file_path, file_path2
+
+
+if __name__ == "__main__":
+    extract()
