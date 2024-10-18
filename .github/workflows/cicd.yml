@@ -9,6 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Environment Variables
+        run: |
+          echo "SERVER_HOSTNAME=${{ secrets.server_host }}" >> $GITHUB_ENV
+          echo "HTTP_PATH=${{ secrets.http_path }}" >> $GITHUB_ENV
+          echo "ACCESS_TOKEN=${{ secrets.api_key }}" >> $GITHUB_ENV
       - uses: actions/checkout@v3
       - name: install packages
         run: make install

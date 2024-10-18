@@ -1,6 +1,5 @@
 """
-Test goes here
-
+Test script for the Georgia recruiting data pipeline.
 """
 
 import subprocess
@@ -9,7 +8,7 @@ import subprocess
 def test_extract():
     """Tests the extract() function."""
     result = subprocess.run(
-        ["python", "main.py"],
+        ["python", "main.py", "extract"],
         capture_output=True,
         text=True,
         check=True,
@@ -21,7 +20,7 @@ def test_extract():
 def test_transform_load():
     """Tests the transform_load() function."""
     result = subprocess.run(
-        ["python", "main.py"],
+        ["python", "main.py", "load"],
         capture_output=True,
         text=True,
         check=True,
@@ -30,61 +29,39 @@ def test_transform_load():
     assert "Transforming data..." in result.stdout
 
 
-def test_create_record():
-    """Tests the create_record() function."""
+def test_query():
+    """Tests a general SQL query on both Georgia offers and commits data."""
     result = subprocess.run(
         [
             "python",
             "main.py",
+            "query",
+            """
+            WITH all_players AS (
+                SELECT 'Offers' AS source, name, school, city, state, ranking
+                FROM georgia_offers
+                UNION ALL
+                SELECT 'Commits' AS source, name, school, city, state, ranking
+                FROM georgia_commits
+            )
+
+            SELECT state, COUNT(*) AS total_players, AVG(ranking) AS avg_ranking
+            FROM all_players
+            GROUP BY state
+            ORDER BY total_players DESC;
+            """,
         ],
         capture_output=True,
         text=True,
         check=True,
     )
     assert result.returncode == 0
-    assert "Querying data..." in result.stdout
-
-
-def test_read_data():
-    """Tests the read_data() function."""
-    result = subprocess.run(
-        ["python", "main.py"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_update_record():
-    """Tests the update_record() function."""
-    result = subprocess.run(
-        [
-            "python",
-            "main.py",
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_delete_record():
-    """Tests the delete_record() function."""
-    result = subprocess.run(
-        ["python", "main.py"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
+    assert "state" in result.stdout
+    assert "total_players" in result.stdout
+    assert "avg_ranking" in result.stdout
 
 
 if __name__ == "__main__":
     test_extract()
     test_transform_load()
-    test_create_record()
-    test_read_data()
-    test_update_record()
-    test_delete_record()
+    test_query()

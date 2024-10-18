@@ -2,43 +2,44 @@
 Handles CLI commands
 """
 
+import sys
+import argparse
 from mylib.extract import extract
 from mylib.transform_load import load
-from mylib.query import create_record, read_data, update_record, delete_record
+from mylib.query import general_query
 
-# Extract
-print("Extracting data...")
-extract()
 
-# Transform and load
-print("Transforming data...")
-load()
+def handle_arguments(args):
+    """Create action for CL Calls"""
+    parser = argparse.ArgumentParser(description="ETL-Query script")
+    parser.add_argument(
+        "action",
+        choices=["extract", "transform_load", "query"],
+    )
+    args = parser.parse_args(args[:1])
+    print(args.action)
 
-# Query
-print("Querying data...")
-create_record(
-    "7",
-    "Alex",
-    3000,
-    0.45,
-    0.55,
-    0.1,
-)
+    if args.action == "query":
+        parser.add_argument("query")
+    return parser.parse_args(sys.argv[1:])
 
-# Read the first 10 rows of the data
-data = read_data()
-print(data)
 
-# Update a record
-update_record(
-    "8",
-    "Taylor",
-    5000,
-    0.45,
-    0.55,
-    0.1,
-)
+def main():
+    """handles all the cli commands"""
+    args = handle_arguments(sys.argv[1:])
 
-# Delete a record
-print("Deleting data...")
-delete_record(9)
+    if args.action == "extract":
+        print("Extracting data...")
+        extract()
+    elif args.action == "load":
+        print("Transforming data...")
+        load()
+    elif args.action == "query":
+        general_query(args.query)
+
+    else:
+        print(f"Unknown action: {args.action}")
+
+
+if __name__ == "__main__":
+    main()

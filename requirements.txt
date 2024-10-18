@@ -7,3 +7,7 @@ fire==0.7.0
 #rust based linter
 ruff==0.0.284
 pylint==2.15.3
+pandas
+python
+python-dotenv
+databricks-sql-connector 
