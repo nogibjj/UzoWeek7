@@ -40,10 +40,10 @@ generate_and_push:
 	fi
 
 extract:
-	python main.py extract
+	python mylib/extract.py
 
 transform_load: 
-	python main.py transform_load
+	python mylib/transform_load.py
 
 query:
-	python main.py general_query
+	python mylib/query.py
