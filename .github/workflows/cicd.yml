@@ -19,12 +19,12 @@ jobs:
         run: make install
       - name: lint
         run: make lint
-      - name: extract 
-        run: make extract 
-      - name: transform_load
-        run: make transform_load 
-      - name: query
-        run: make query
+      # - name: extract 
+      #   run: make extract 
+      # - name: transform_load
+      #   run: make transform_load 
+      # - name: query
+      #   run: make query
       - name: test
         env:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
@@ -35,5 +35,5 @@ jobs:
         run: make format
       - name: generate_and_push
         run: make generate_and_push
-      - name: deploy
-        run: make deploy
+      # - name: deploy
+      #   run: make deploy
