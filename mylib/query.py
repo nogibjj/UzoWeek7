@@ -13,12 +13,14 @@ GROUP BY a.state
 ORDER BY a.state DESC;
 """
 
+LOG_FILE = "query_results.md"
 
-# def edit_markdown(query, result="none"):
-#     """adds to a query markdown file"""
-#     # with open(QU, "a") as file:
-#         file.write(f"```sql\n{query}\n```\n\n")
-#         file.write(f"```response from databricks\n{result}\n```\n\n")
+
+def edit_markdown(query, result="none"):
+    """adds to a query markdown file"""
+    with open(LOG_FILE, "a") as file:
+        file.write(f"```sql\n{query}\n```\n\n")
+        file.write(f"```response from databricks\n{result}\n```\n\n")
 
 
 def general_query(query):
@@ -37,11 +39,11 @@ def general_query(query):
         c.execute(query)
         result = c.fetchall()
     c.close()
-    # edit_markdown(f"{query}", result)
+    edit_markdown(f"{query}", result)
     print(result)
+    print("Running query...")
 
 
 if __name__ == "__main__":
     print(QUERY)
     general_query(QUERY)
-    # edit_markdown(f"{query}", result)
