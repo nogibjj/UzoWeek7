@@ -23,10 +23,13 @@ def main():
     args = handle_arguments()
 
     if args.command == "extract":
+        print("Extracting data...")
         extract()
     elif args.command == "transform_load":
+        print("Transforming data...")
         transform_load()
     elif args.command == "query":
+        print("Running query...")
         general_query()
     else:
         print("Unknown command")
