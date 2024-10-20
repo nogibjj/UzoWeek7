@@ -39,7 +39,7 @@ def main():
         transform_load()
     elif args.command == "query":
         print("Running query...")
-        general_query()
+        general_query(QUERY)
     else:
         print("Unknown command")
 
