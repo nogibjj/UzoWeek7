@@ -7,6 +7,15 @@ from mylib.extract import extract
 from mylib.transform_load import transform_load
 from mylib.query import general_query
 
+QUERY = """ 
+SELECT a.state, avg(a.ranking) as average_ranking
+FROM udugeorgiaoffersdb a
+JOIN udugeorgiacommitsdb b
+ON a.name = b.name
+GROUP BY a.state
+ORDER BY a.state DESC;
+"""
+
 
 def handle_arguments():
     parser = argparse.ArgumentParser(description="Handle data pipeline tasks.")
