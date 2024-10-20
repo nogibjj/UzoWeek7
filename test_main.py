@@ -4,6 +4,15 @@ Test script for the Georgia recruiting data pipeline.
 
 import subprocess
 
+QUERY = """ 
+SELECT a.state, avg(a.ranking) as average_ranking
+FROM udugeorgiaoffersdb a
+JOIN udugeorgiacommitsdb b
+ON a.name = b.name
+GROUP BY a.state
+ORDER BY a.state DESC;
+"""
+
 
 def test_extract():
     """Tests the extract() function."""
@@ -44,4 +53,4 @@ def test_query():
 if __name__ == "__main__":
     test_extract()
     test_transform_load()
-    test_query()
+    test_query(QUERY)
