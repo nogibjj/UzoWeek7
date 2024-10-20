@@ -26,7 +26,7 @@ def general_query(query):
     load_dotenv()
     server_hostname = os.getenv("SERVER_HOST")
     access_token = os.getenv("API_KEY")
-    http_path = os.getenv("HTTP_PATH")
+    # http_path = os.getenv("HTTP_PATH")
     with sql.connect(
         server_hostname=server_hostname,
         http_path="/sql/1.0/warehouses/2d6f41451e6394c0",
