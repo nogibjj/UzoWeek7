@@ -53,4 +53,4 @@ def test_query():
 if __name__ == "__main__":
     test_extract()
     test_transform_load()
-    test_query(QUERY)
+    test_query()
