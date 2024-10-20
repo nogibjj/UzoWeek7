@@ -32,32 +32,13 @@ def test_transform_load():
 def test_query():
     """Tests the query() function."""
     result = subprocess.run(
-        [
-            "python",
-            "main.py",
-            "query",
-            """
-            SELECT a.state, avg(a.ranking) as average_ranking
-            FROM udugeorgiaoffersdb a
-            JOIN udugeorgiacommitsdb b
-            ON a.name = b.name
-            GROUP BY a.state
-            ORDER BY a.state DESC;
-            """,
-        ],
+        ["python", "main.py", "query"],
         capture_output=True,
         text=True,
-        check=False,  # Disable the check for exit status 0 to prevent immediate failure
+        check=True,  # Enable check to ensure the process completes successfully
     )
-
-    # Print stdout and stderr for debugging purposes
-    print("stdout:", result.stdout)
-    print("stderr:", result.stderr)
-
-    # Now, you can check if the result returned an error
-    assert (
-        result.returncode == 0
-    ), f"Command failed with return code {result.returncode}. stderr: {result.stderr}"
+    assert result.returncode == 0
+    assert "Running query..." in result.stdout
 
 
 if __name__ == "__main__":

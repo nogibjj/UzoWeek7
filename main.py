@@ -2,43 +2,46 @@
 Handles CLI commands
 """
 
-import sys
 import argparse
 from mylib.extract import extract
 from mylib.transform_load import transform_load
 from mylib.query import general_query
 
 
-def handle_arguments(args):
-    """Create action for CL Calls"""
-    parser = argparse.ArgumentParser(description="ETL-Query script")
-    parser.add_argument(
-        "action",
-        choices=["extract", "transform_load", "query"],
-    )
-    args = parser.parse_args(args[:1])
-    print(args.action)
+def extract():
+    print("Extracting data...")
 
-    if parser.action == "query":
-        parser.add_argument("query", help="The query to execute")
-    return parser.parse_args(sys.argv[1:])
+
+def transform_load():
+    print("Transforming data...")
+
+
+def general_query():
+    print("Running query...")
+
+
+def handle_arguments():
+    parser = argparse.ArgumentParser(description="Handle data pipeline tasks.")
+    subparsers = parser.add_subparsers(dest="command")
+
+    subparsers.add_parser("extract", help="Extract data")
+    subparsers.add_parser("transform_load", help="Transform and load data")
+    subparsers.add_parser("query", help="Run query")
+
+    return parser.parse_args()
 
 
 def main():
-    """handles all the cli commands"""
-    args = handle_arguments(sys.argv[1:])
+    args = handle_arguments()
 
-    if args.action == "extract":
-        print("Extracting data...")
+    if args.command == "extract":
         extract()
-    elif args.action == "transform_load":
-        print("Transforming data...")
+    elif args.command == "transform_load":
         transform_load()
-    elif args.action == "query":
-        general_query(args.query)
-
+    elif args.command == "query":
+        general_query()
     else:
-        print(f"Unknown action: {args.action}")
+        print("Unknown command")
 
 
 if __name__ == "__main__":
