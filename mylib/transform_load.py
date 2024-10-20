@@ -18,7 +18,7 @@ def transform_load(
     load_dotenv()
     server_hostname = os.getenv("SERVER_HOST")
     access_token = os.getenv("API_KEY")
-    http_path = os.getenv("HTTP_PATH")
+    # http_path = os.getenv("HTTP_PATH")
     print(
         server_hostname,
         access_token,
