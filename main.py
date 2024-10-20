@@ -19,8 +19,8 @@ def handle_arguments(args):
     args = parser.parse_args(args[:1])
     print(args.action)
 
-    if args.action == "query":
-        parser.add_argument("query")
+    if parser.action == "query":
+        parser.add_argument("query", help="The query to execute")
     return parser.parse_args(sys.argv[1:])
 
 
