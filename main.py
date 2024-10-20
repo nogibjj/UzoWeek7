@@ -8,18 +8,6 @@ from mylib.transform_load import transform_load
 from mylib.query import general_query
 
 
-def extract():
-    print("Extracting data...")
-
-
-def transform_load():
-    print("Transforming data...")
-
-
-def general_query():
-    print("Running query...")
-
-
 def handle_arguments():
     parser = argparse.ArgumentParser(description="Handle data pipeline tasks.")
     subparsers = parser.add_subparsers(dest="command")
