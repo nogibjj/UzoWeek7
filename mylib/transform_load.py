@@ -60,7 +60,8 @@ def transform_load(
                 for _, row in payload.iterrows():
                     cursor.execute(
                         """
-                        INSERT INTO uduGeorgiaCommitsDB (name, school, city, state, ranking)
+                        INSERT INTO uduGeorgiaCommitsDB 
+                        (name, school, city, state, ranking)
                         VALUES (?, ?, ?, ?, ?)
                         """,
                         tuple(row),
@@ -89,7 +90,8 @@ def transform_load(
                 for _, row in payload2.iterrows():
                     cursor.execute(
                         """
-                        INSERT INTO uduGeorgiaOffersDB (name, school, city, state, ranking)
+                        INSERT INTO uduGeorgiaOffersDB 
+                        (name, school, city, state, ranking)
                         VALUES (?, ?, ?, ?, ?)
                         """,
                         tuple(row),
