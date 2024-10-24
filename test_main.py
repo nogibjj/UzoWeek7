@@ -2,7 +2,10 @@
 Test script for the Georgia recruiting data pipeline.
 """
 
+from dotenv import load_dotenv
 import subprocess
+
+load_dotenv()
 
 QUERY = """ 
 SELECT a.state, avg(a.ranking) as average_ranking
